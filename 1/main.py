@@ -1,18 +1,22 @@
+#%% [markdown]
+# ## Occurrence of Numbers
+# The Graph below shows the Occurence of the numbers in the given P.csv file
+
 #%%
-from csv import reader
-from collections import defaultdict
+from csv import reader as csvReader
+from collections import Counter
 from matplotlib import pyplot as plt
 
 with open('P.csv', 'r') as csvFile:
-    reader = csv.reader(csvFile, delimiter=';')
+    reader = csvReader(csvFile, delimiter=';')
     for row in reader:
-        counter = defaultdict(int)
-        for i in row:
+        counter = Counter()
+        for v in row:
             try:
-                counter[int(i)] += 1
+                counter[int(v)] += 1
             except ValueError:
                 # Not a number
-                print(i + " is not a Number")
+                print(v + " is not a Number")
         
         plt.title("Occurrence of Numbers")
         plt.ylabel("Count")
