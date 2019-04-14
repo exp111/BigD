@@ -21,5 +21,5 @@ with open('P.csv', 'r') as csvFile:
         plt.title("Occurrence of Numbers")
         plt.ylabel("Count")
         plt.xlabel("Number")
-        plt.bar(counter.keys(), counter.values())
+        plt.bar(counter.keys(), counter.values(), width=1)
         plt.show()
