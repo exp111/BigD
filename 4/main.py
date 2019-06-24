@@ -7,8 +7,8 @@
 #-- Iris Versicolour
 #-- Iris Virginica
 
-#%%
-## b)
+#%% [markdown]
+# ## b)
 # Laden sie den Iris-Datensatz in einen Dataframe (Datei:datasets.zip/datasets/iris/data.all) 
 # und drucken Sie grundlegende Statistiken zu den Daten (wie geht das einfach mit einem Dataframe?)!
 import pandas
@@ -22,8 +22,8 @@ df = pandas.read_csv(
 print(df)
 df.describe()
 
-#%%
-## c)
+#%% [markdown]
+# ## c)
 # Visualisieren Sie den Datensatz
 # Als Scattermatrix (mittels des python Paketes matplotlib)
 # Als Boxplots für die einzelnen Spalte des Datensatzes
@@ -38,7 +38,7 @@ def colorByClass(c):
     elif c == "Iris-virginica":
         return "b"
     return "c"
-    
+
 columns = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
 df = pandas.read_csv(
     "4/data.all",
