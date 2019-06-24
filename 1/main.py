@@ -8,8 +8,8 @@
 
 #%%
 from csv import reader as csvReader
-from collections import Counter
 from matplotlib import pyplot as plt
+import os
 
 def filterer(string):
     try:
@@ -38,7 +38,6 @@ with open('P.csv', 'r') as csvFile:
 
 #%%
 from csv import reader as csvReader
-from collections import Counter
 from matplotlib import pyplot as plt
 
 def filterer(string):

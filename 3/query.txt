@@ -1,0 +1,10 @@
+CREATE TABLE shuttle (lines string) location '/user/maria_dev/hadoop/shuttle/';
+LOAD DATA INPATH '/user/maria_dev/hadoop/shuttle/data.all' INTO TABLE shuttle;
+
+SELECT * FROM shuttle;
+
+CREATE TABLE wordCount AS SELECT word, COUNT(1) AS count FROM shuttle LATERAL VIEW explode(split(lines, ' ')) lTable AS word GROUP BY word;
+
+SELECT * FROM wordCount ORDER BY wordCount.count DESC;
+
+SELECT AVG(wordCount.count) as average, MAX(wordCount.count) as maximum, MIN(wordCount.count) as minimum FROM wordCount;

@@ -1,0 +1,19 @@
+lines = LOAD '/user/maria_dev/hadoop/geolocation/geolocation.csv' AS (line:Chararray);
+
+words = FOREACH lines GENERATE FLATTEN(TOKENIZE(line, ',')) AS word;
+
+grouped = GROUP words BY word;
+wordCount = FOREACH grouped GENERATE group, COUNT(words) AS counter;
+ordered = ORDER wordCount BY counter DESC;
+
+dump ordered
+
+groupedAll = GROUP wordCount ALL;
+average = FOREACH groupedAll GENERATE AVG(wordCount.counter); 
+dump average;
+
+maximum = FOREACH groupedAll GENERATE MAX(wordCount.counter);
+dump maximum;
+
+minimum = FOREACH groupedAll GENERATE MIN(wordCount.counter);
+dump minimum;
