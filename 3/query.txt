@@ -1,10 +1,27 @@
-CREATE TABLE shuttle (lines string) location '/user/maria_dev/hadoop/shuttle/';
-LOAD DATA INPATH '/user/maria_dev/hadoop/shuttle/data.all' INTO TABLE shuttle;
+DROP TABLE IF EXISTS shuttle
 
-SELECT * FROM shuttle;
+CREATE TABLE shuttle (A1 INT, 
+ A2 INT, 
+ A3 INT, 
+ A4 INT,
+ A5 INT, 
+ A6 INT, 
+ A7 INT, 
+ A8 INT, 
+ A9 INT, 
+ Class STRING) 
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ' '
+STORED AS TEXTFILE
 
-CREATE TABLE wordCount AS SELECT word, COUNT(1) AS count FROM shuttle LATERAL VIEW explode(split(lines, ' ')) lTable AS word GROUP BY word;
+LOAD DATA INPATH '/user/maria_dev/hadoop/shuttle/data.all' OVERWRITE INTO TABLE shuttle
 
-SELECT * FROM wordCount ORDER BY wordCount.count DESC;
+SELECT Class FROM shuttle GROUP BY Class
 
-SELECT AVG(wordCount.count) as average, MAX(wordCount.count) as maximum, MIN(wordCount.count) as minimum FROM wordCount;
+SELECT Class, AVG(A1) AS AvgA1, AVG(A2) AS AvgA2, AVG(A3) AS AvgA3, AVG(A4) AS AvgA4, AVG(A5) AS AvgA5, AVG(A6) AS AvgA6, AVG(A7) AS AvgA7, AVG(A8) AS AvgA8, AVG(A9) AS AvgA9 FROM shuttle GROUP BY Class
+
+SELECT Class, MIN(A1) AS MinA1, MIN(A2) AS MinA2, MIN(A3) AS MinA3, MIN(A4) AS MinA4, MIN(A5) AS MinA5, MIN(A6) AS MinA6, MIN(A7) AS MinA7, MIN(A8) AS MinA8, MIN(A9) AS MinA9 FROM shuttle GROUP BY Class
+
+SELECT Class, MAX(A1) AS MaxA1, MAX(A2) AS MaxA2, MAX(A3) AS MaxA3, MAX(A4) AS MaxA4, MAX(A5) AS MaxA5, MAX(A6) AS MaxA6, MAX(A7) AS MaxA7, MAX(A8) AS MaxA8, MAX(A9) AS MaxA9 FROM shuttle GROUP BY Class
+
+SELECT Class, SUM(A1) AS SumA1, SUM(A2) AS SumA2, SUM(A3) AS SumA3, SUM(A4) AS SumA4, SUM(A5) AS SumA5, SUM(A6) AS SumA6, SUM(A7) AS SumA7, SUM(A8) AS SumA8, SUM(A9) AS SumA9 FROM shuttle GROUP BY Class

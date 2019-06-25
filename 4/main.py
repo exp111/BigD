@@ -16,11 +16,11 @@ import pandas
 columns = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
 df = pandas.read_csv(
     "4/data.all",
-    names= columns, 
-    sep="\s+",
-    header = 0)
-print(df)
-df.describe()
+    sep = "\s+",
+    header = 0,
+    names = columns)
+print(df) # Print whole dataframe
+df.describe() # Print Statistics (like min, max, mean etc.)
 
 #%% [markdown]
 # ## c)
@@ -30,21 +30,21 @@ df.describe()
 from matplotlib import pyplot as plt
 import pandas
 
-def colorByClass(c):
+def colorByClass(c): # Assign to every Flower Species a specific color
     if c == "Iris-setosa":
         return "r"
     elif c == "Iris-versicolor":
         return "g"
     elif c == "Iris-virginica":
         return "b"
-    return "c"
+    return "c" # default to cyan; shouldn't appear here
 
 columns = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
 df = pandas.read_csv(
     "4/data.all",
-    sep="\s+",
+    sep = "\s+",
     header = 0,
-    names= columns)
+    names = columns)
 colors = map(colorByClass, df["Class"])
 plt.scatter(df["Sepal Length"], df["Sepal Width"], c=colors)
 plt.xlabel("Sepal Length")
@@ -56,6 +56,4 @@ plt.xlabel("Petal Length")
 plt.ylabel("Petal Width")
 plt.show()
 
-df.plot(kind="box", subplots = True)
-
-#%%
+df.plot(kind="box", subplots = True) # for every column a new plot
