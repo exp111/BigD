@@ -29,31 +29,17 @@ df.describe() # Print Statistics (like min, max, mean etc.)
 # Als Boxplots für die einzelnen Spalte des Datensatzes
 from matplotlib import pyplot as plt
 import pandas
+import seaborn
 
-def colorByClass(c): # Assign to every Flower Species a specific color
-    if c == "Iris-setosa":
-        return "r"
-    elif c == "Iris-versicolor":
-        return "g"
-    elif c == "Iris-virginica":
-        return "b"
-    return "c" # default to cyan; shouldn't appear here
-
+seaborn.set(style="ticks")
 columns = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
 df = pandas.read_csv(
     "4/data.all",
     sep = "\s+",
     header = 0,
     names = columns)
-colors = map(colorByClass, df["Class"])
-plt.scatter(df["Sepal Length"], df["Sepal Width"], c=colors)
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal Width")
-plt.show()
+seaborn.pairplot(df, hue = "Class") # Scatter Matrix, color by Class column
 
-plt.scatter(df["Petal Length"], df["Petal Width"], c=colors)
-plt.xlabel("Petal Length")
-plt.ylabel("Petal Width")
-plt.show()
+df.plot(kind = "box", subplots = True) # for every column a new plot
 
-df.plot(kind="box", subplots = True) # for every column a new plot
+#%%
